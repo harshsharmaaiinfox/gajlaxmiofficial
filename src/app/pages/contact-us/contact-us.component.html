@@ -1,0 +1,88 @@
+<div class="contact_us_green">
+  <div class="responsive-container-block big-container">
+    <div class="responsive-container-block container">
+      <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-7 wk-ipadp-10 line" id="i69b-2">
+        <form class="form-box" [formGroup]="contactForm" (ngSubmit)="submitForm()">
+          <div class="container-block form-wrapper">
+            <div class="head-text-box">
+              <p class="text-blk contactus-head">Contact us</p>
+            </div>
+            <div class="responsive-container-block">
+              <div class="responsive-cell-block wk-ipadp-6 wk-tab-12 wk-mobile-12 wk-desk-6">
+                <p class="text-blk input-title">FIRST NAME</p>
+                <input class="input" formControlName="firstName">
+                <br><small class="error" *ngIf="contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched">
+                  First name is required.
+                </small>
+              </div>
+              <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12">
+                <p class="text-blk input-title">LAST NAME</p>
+                <input class="input" formControlName="lastName">
+               <br> <small class="error" *ngIf="contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched">
+                  Last name is required.
+                </small>
+              </div>
+              <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12">
+                <p class="text-blk input-title">EMAIL</p>
+                <input class="input" formControlName="email">
+                <br><small class="error" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+                  Fill valid email address.
+                </small>
+              </div>
+              <div class="responsive-cell-block wk-desk-6 wk-ipadp-6 wk-tab-12 wk-mobile-12">
+                <p class="text-blk input-title">PHONE NUMBER</p>
+                <input class="input" formControlName="phoneNumber">
+               <br> <small class="error" *ngIf="contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched">
+                  Fill valid 10-digit phone number.
+                </small>
+              </div>
+              <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12">
+                <p class="text-blk input-title">WHAT DO YOU HAVE IN MIND</p>
+                <textarea class="textinput" formControlName="query" placeholder="Please enter query..."></textarea>
+               <br> <small class="error" *ngIf="contactForm.get('query')?.invalid && contactForm.get('query')?.touched">
+                  Query must be at least 10 characters long.
+                </small>
+              </div>
+            </div>
+            <div class="btn-wrapper">
+              <button class="submit-btn" type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+
+      <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-5 wk-ipadp-10" id="ifgi">
+        <div class="container-box">
+          <div class="text-content">
+            <p class="text-blk contactus-head">Contact us</p>
+            <h3 class="mb-4">GAJLAXMI PROJECTS PRIVATE LIMITED</h3>
+          </div>
+          <div class="workik-contact-bigbox">
+            <div class="workik-contact-box">
+              <div class="phone text-box">
+                <img class="contact-svg" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/ET21.jpg">
+                <p class="contact-text">+91 9220883840</p>
+              </div>
+              <div class="address text-box">
+                <img class="contact-svg" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/ET22.jpg">
+                <p class="contact-text">
+                  <a href="mailto:support&#64;gajlaxmi.com">support&#64;gajlaxmi.com</a>
+                </p>
+              </div>
+              <div class="mail text-box">
+                <img class="contact-svg" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/ET23.jpg">
+                <p class="contact-text">
+                  Shop No 121 Plot No 26 First Floor, Royal Arcade Road No 44 Pitampura Near Chunmun Mall, Rani Bagh, North West Delhi, Delhi, Delhi, India, 110034
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

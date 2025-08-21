@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /no-index/
+Sitemap: https://www.gajlaxmifashion.in/sitemap.xml
