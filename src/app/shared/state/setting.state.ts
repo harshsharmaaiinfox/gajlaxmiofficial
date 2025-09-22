@@ -80,7 +80,7 @@ export class SettingState {
               },
               {
                 name: 'gajlaxmi_neo',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT',
               },
               {
@@ -91,7 +91,7 @@ export class SettingState {
               },
               {
                 name: 'gajlaxmi_neo2',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT2',
               },
             ];
