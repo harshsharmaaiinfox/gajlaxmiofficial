@@ -53,7 +53,7 @@ export class AddressModalComponent {
 
   ) {
     this.form = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
       street: new FormControl('', [Validators.required]),
       state_id: new FormControl('', [Validators.required]),
       country_id: new FormControl('', [Validators.required]),
@@ -61,7 +61,7 @@ export class AddressModalComponent {
       area: new FormControl('', [Validators.required]),
       pincode: new FormControl('', [Validators.required]),
       country_code: new FormControl('91', [Validators.required]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)])
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)])
     })
 
     this.form.controls['phone']?.valueChanges.subscribe((value) => {
@@ -337,6 +337,44 @@ export class AddressModalComponent {
           }
         }
       });
+    }
+  }
+
+  // Input restrictions for title (alphabets and spaces only)
+  allowOnlyAlphabets(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[A-Za-z\s]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  // Input restrictions for phone (digits only)
+  allowOnlyDigits(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[0-9]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  sanitizeTitleInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^A-Za-z\s]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get('title')?.setValue(sanitized, { emitEvent: false });
+    }
+  }
+
+  sanitizePhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^0-9]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get('phone')?.setValue(sanitized, { emitEvent: false });
     }
   }
 

@@ -20,9 +20,9 @@ export class BankDetailsComponent {
 
   constructor(private store: Store) {
     this.form = new FormGroup({
-      bank_account_no: new FormControl(),
-      bank_name: new FormControl(),
-      bank_holder_name: new FormControl(),
+      bank_account_no: new FormControl('', [Validators.pattern(/^[0-9]+$/)]),
+      bank_name: new FormControl('', [Validators.pattern(/^[A-Za-z\s]+$/)]),
+      bank_holder_name: new FormControl('', [Validators.pattern(/^[A-Za-z\s]+$/)]),
       swift: new FormControl(),
       ifsc: new FormControl(),
       paypal_email: new FormControl('', [Validators.email]),
@@ -47,6 +47,43 @@ export class BankDetailsComponent {
     this.form.markAllAsTouched();
     if(this.form.valid){
       this.store.dispatch(new UpdatePaymentDetails(this.form.value))
+    }
+  }
+
+  // Input restrictions
+  allowOnlyDigits(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[0-9]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  allowOnlyAlphabets(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[A-Za-z\s]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  sanitizeDigitsInput(event: Event, controlName: string) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^0-9]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get(controlName)?.setValue(sanitized, { emitEvent: false });
+    }
+  }
+
+  sanitizeAlphaInput(event: Event, controlName: string) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^A-Za-z\s]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get(controlName)?.setValue(sanitized, { emitEvent: false });
     }
   }
 

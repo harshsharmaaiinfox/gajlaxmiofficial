@@ -7,19 +7,22 @@
     <div class="row mb-3 align-items-center">
         <label for="bank_account_no" class="form-label col-xxl-2 col-lg-12 col-md-3">{{ 'Bank Account No.'| translate}}</label>
         <div class="col-xxl-10 col-lg-12 col-md-9">
-            <input type="text" class="form-control" id="bank_account_no" placeholder="{{ 'Enter bank Account Number' | translate }}" formControlName="bank_account_no" numbersOnly>
+            <input type="text" class="form-control" id="bank_account_no" placeholder="{{ 'Enter bank Account Number' | translate }}" formControlName="bank_account_no" (keypress)="allowOnlyDigits($event)" (input)="sanitizeDigitsInput($event, 'bank_account_no')">
+            <div class="invalid-feedback" *ngIf="form.controls['bank_account_no']?.touched && form.controls['bank_account_no']?.errors?.['pattern']">{{ 'Only digits allowed' | translate }}</div>
         </div>
     </div>
     <div class="row mb-3 align-items-center">
         <label for="bank_name" class="form-label col-xxl-2 col-lg-12 col-md-3">{{ 'Bank Name'| translate}}</label>
         <div class="col-xxl-10 col-lg-12 col-md-9">
-            <input type="text" class="form-control" id="bank_name" placeholder="{{ 'Enter Bank Name' | translate }}" formControlName="bank_name">
+            <input type="text" class="form-control" id="bank_name" placeholder="{{ 'Enter Bank Name' | translate }}" formControlName="bank_name" (keypress)="allowOnlyAlphabets($event)" (input)="sanitizeAlphaInput($event, 'bank_name')">
+            <div class="invalid-feedback" *ngIf="form.controls['bank_name']?.touched && form.controls['bank_name']?.errors?.['pattern']">{{ 'Only alphabets allowed' | translate }}</div>
         </div>
     </div>
     <div class="row mb-3 align-items-center">
         <label for="bank_holder_name" class="form-label col-xxl-2 col-lg-12 col-md-3">{{ 'Holder Name'| translate}}</label>
         <div class="col-xxl-10 col-lg-12 col-md-9">
-            <input type="text" class="form-control" id="bank_holder_name" placeholder="{{ 'Enter Bank Holder Name' | translate }}" formControlName="bank_holder_name">
+            <input type="text" class="form-control" id="bank_holder_name" placeholder="{{ 'Enter Bank Holder Name' | translate }}" formControlName="bank_holder_name" (keypress)="allowOnlyAlphabets($event)" (input)="sanitizeAlphaInput($event, 'bank_holder_name')">
+            <div class="invalid-feedback" *ngIf="form.controls['bank_holder_name']?.touched && form.controls['bank_holder_name']?.errors?.['pattern']">{{ 'Only alphabets allowed' | translate }}</div>
         </div>
     </div>
     <div class="row mb-3 align-items-center">

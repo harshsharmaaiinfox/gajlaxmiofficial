@@ -40,9 +40,9 @@ export class RegisterComponent {
     private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
       country_code: new FormControl('91', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       password_confirmation: new FormControl('', [Validators.required]),
@@ -65,6 +65,44 @@ export class RegisterComponent {
       this.form.getError('mismatch') &&
       this.form.get('password_confirmation')?.touched
     );
+  }
+
+  // Allow only alphabets and spaces while typing; sanitize pasted input
+  allowOnlyAlphabets(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[A-Za-z\s]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  // Allow only digits while typing; sanitize pasted input
+  allowOnlyDigits(event: KeyboardEvent) {
+    const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
+    if (allowedControlKeys.includes(event.key)) return;
+    const isValid = /^[0-9]$/.test(event.key);
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+
+  sanitizeNameInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^A-Za-z\s]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get('name')?.setValue(sanitized, { emitEvent: false });
+    }
+  }
+
+  sanitizePhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const sanitized = input.value.replace(/[^0-9]/g, '');
+    if (sanitized !== input.value) {
+      input.value = sanitized;
+      this.form.get('phone')?.setValue(sanitized, { emitEvent: false });
+    }
   }
 
   submit() {
