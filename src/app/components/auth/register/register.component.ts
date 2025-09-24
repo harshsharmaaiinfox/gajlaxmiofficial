@@ -42,7 +42,7 @@ export class RegisterComponent {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
       country_code: new FormControl('91', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       password_confirmation: new FormControl('', [Validators.required]),
@@ -81,6 +81,16 @@ export class RegisterComponent {
   allowOnlyDigits(event: KeyboardEvent) {
     const allowedControlKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Home', 'End'];
     if (allowedControlKeys.includes(event.key)) return;
+    
+    const input = event.target as HTMLInputElement;
+    const currentValue = input.value;
+    
+    // Prevent input if already 10 digits
+    if (currentValue.length >= 10) {
+      event.preventDefault();
+      return;
+    }
+    
     const isValid = /^[0-9]$/.test(event.key);
     if (!isValid) {
       event.preventDefault();
@@ -99,9 +109,12 @@ export class RegisterComponent {
   sanitizePhoneInput(event: Event) {
     const input = event.target as HTMLInputElement;
     const sanitized = input.value.replace(/[^0-9]/g, '');
-    if (sanitized !== input.value) {
-      input.value = sanitized;
-      this.form.get('phone')?.setValue(sanitized, { emitEvent: false });
+    // Truncate to maximum 10 digits
+    const truncated = sanitized.substring(0, 10);
+    
+    if (truncated !== input.value) {
+      input.value = truncated;
+      this.form.get('phone')?.setValue(truncated, { emitEvent: false });
     }
   }
 

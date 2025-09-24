@@ -35,10 +35,10 @@
                             </div>
                             <div class="col-12 phone-field">
                                 <div class="form-floating log-in-form">
-                                    <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'Phone' | translate }}" (keypress)="allowOnlyDigits($event)" (input)="sanitizePhoneInput($event)">
+                                    <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'Phone' | translate }}" maxlength="10" (keypress)="allowOnlyDigits($event)" (input)="sanitizePhoneInput($event)">
                                     <label for="phone">{{ 'Phone Number' | translate }}</label>
                                     <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['required']" class="invalid-feedback">{{ 'Phone Number Is Required' | translate }}</div>
-                                    <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['pattern']" class="invalid-feedback">{{ 'Only digits allowed' | translate }}</div>
+                                    <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors?.['pattern']" class="invalid-feedback">{{ 'Phone number must be exactly 10 digits' | translate }}</div>
                                     <select2 class="custom-select intl-tel-input"
                                       [data]="codes"
                                       [templates]="template"
