@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /no-index/
-Sitemap: https://www.gajlaxmifashion.in/sitemap.xml
+Allow: /
+Sitemap: https://gajlaxmifashion.in/sitemap.xml
