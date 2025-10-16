@@ -60,19 +60,19 @@ export const content: Routes = [
     title: 'My Account – Orders & Profile | Gajlaxmi Fashion'
   },
   {
-    path: "",
+    path: "shop",
     loadChildren: () =>
       import("../../components/shop/shop.module").then((m) => m.ShopModule),
     title: 'Shop Sarees, Lehengas & More – Gajlaxmi Fashion'
   },
   {
-    path: "",
+    path: "blog",
     loadChildren: () =>
       import("../../components/blog/blog.module").then((m) => m.BlogModule),
     title: 'Gajlaxmi Blog – Fashion Tips & News'
   },
   {
-    path: "",
+    path: "pages",
     loadChildren: () =>
       import("../../components/page/page.module").then((m) => m.PagesModule),
     title: 'Explore Gajlaxmi – About, Help & More'

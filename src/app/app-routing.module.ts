@@ -8,11 +8,6 @@ import { ScrollPositionGuard } from './core/guard/scroll.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
     path: "maintenance",
     component: MaintenanceComponent
   },
