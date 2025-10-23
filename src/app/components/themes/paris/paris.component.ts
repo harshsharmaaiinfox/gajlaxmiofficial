@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable, forkJoin } from 'rxjs';
@@ -17,7 +17,7 @@ import { ThemeOptionState } from '../../../shared/state/theme-option.state';
   templateUrl: './paris.component.html',
   styleUrls: ['./paris.component.scss']
 })
-export class ParisComponent {
+export class ParisComponent implements OnInit, OnDestroy {
 
   @Input() data?: Paris;
   @Input() slug?: string;
@@ -25,7 +25,22 @@ export class ParisComponent {
   @Select(ThemeOptionState.themeOptions) themeOption$: Observable<Option>;
 
   public categorySlider = data.categorySlider;
-  public productSlider = data.productSlider
+  public productSlider = data.productSlider;
+
+  // Banner slider properties
+  public currentSlide = 0;
+  public autoSlideInterval: any;
+  public isPaused = false;
+  public bannerImages = [
+    {
+      src: 'assets/images/gajlaxmi_banner.jpg',
+      alt: 'Gaj promotional banner'
+    },
+    {
+      src: 'assets/images/gajlaxmi_banner_2.jpg',
+      alt: 'sale banner'
+    }
+  ];
 
   constructor(private store: Store,
   private themeOptionService: ThemeOptionService,
@@ -33,6 +48,9 @@ export class ParisComponent {
   }
 
   ngOnInit() {
+    // Start auto-slide
+    this.startAutoSlide();
+
     if(this.data?.slug == this.slug) {
       const getProducts$ = this.store.dispatch(new GetProductByIds({
         status: 1,
@@ -83,7 +101,60 @@ export class ParisComponent {
         }
       }
     })
+  }
 
+  ngOnDestroy() {
+    // Clear auto-slide interval when component is destroyed
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+    }
+  }
+
+  // Banner slider methods
+  startAutoSlide() {
+    if (!this.isPaused) {
+      this.autoSlideInterval = setInterval(() => {
+        if (!this.isPaused) {
+          this.nextSlide();
+        }
+      }, 5000); // Auto-slide every 5 seconds
+    }
+  }
+
+  stopAutoSlide() {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+    }
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.bannerImages.length;
+  }
+
+  previousSlide() {
+    this.currentSlide = this.currentSlide === 0 ? this.bannerImages.length - 1 : this.currentSlide - 1;
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+    // Restart auto-slide when user manually navigates
+    this.stopAutoSlide();
+    this.startAutoSlide();
+  }
+
+  pauseAutoSlide() {
+    this.isPaused = true;
+    this.stopAutoSlide();
+  }
+
+  resumeAutoSlide() {
+    this.isPaused = false;
+    this.startAutoSlide();
+  }
+
+  goToCollections() {
+    // Navigate to collections page
+    window.location.href = '/collections?sortBy=asc';
   }
 
 }

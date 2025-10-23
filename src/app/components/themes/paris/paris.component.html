@@ -1,10 +1,64 @@
 <div class="bg-effect">
-    <!-- Stylexio Banner Start -->
+    <!-- Banner Slider Start -->
 <section class="banner-section pt-0 pb-3">
   <div class="container-fluid-lg">
-    <a href="/collections?sortBy=asc">
-    <img src="assets/images/gaj-banner.jpg" alt="gaj promotional banner" class="img-fluid w-100" loading="lazy">
-  </a>
+    <div class="banner-slider-container position-relative">
+      <!-- Banner Images -->
+      <div class="banner-slides">
+        <div 
+          *ngFor="let banner of bannerImages; let i = index"
+          class="banner-slide"
+          [class.active]="i === currentSlide">
+          <a href="/collections?sortBy=asc" [title]="banner.alt">
+            <img 
+              [src]="banner.src" 
+              [alt]="banner.alt" 
+              class="img-fluid w-100" 
+              loading="lazy"
+              [title]="banner.alt">
+            <span class="sr-only">{{ banner.alt }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button 
+        class="slider-nav slider-nav-prev" 
+        (click)="previousSlide()"
+        (mouseenter)="pauseAutoSlide()"
+        (mouseleave)="resumeAutoSlide()"
+        [attr.aria-label]="'Previous slide'"
+        title="Previous slide">
+        <span class="arrow-left"></span>
+        <span class="sr-only">Previous slide</span>
+      </button>
+      
+      <button 
+        class="slider-nav slider-nav-next" 
+        (click)="nextSlide()"
+        (mouseenter)="pauseAutoSlide()"
+        (mouseleave)="resumeAutoSlide()"
+        [attr.aria-label]="'Next slide'"
+        title="Next slide">
+        <span class="arrow-right"></span>
+        <span class="sr-only">Next slide</span>
+      </button>
+
+      <!-- Dots Indicator -->
+      <div class="slider-dots">
+        <button 
+          *ngFor="let banner of bannerImages; let i = index"
+          class="dot"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+          (mouseenter)="pauseAutoSlide()"
+          (mouseleave)="resumeAutoSlide()"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+          [title]="'Go to slide ' + (i + 1)">
+          <span class="sr-only">Slide {{ i + 1 }}</span>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 <!-- Banner Section Start -->
