@@ -37,13 +37,22 @@ export class CategoriesComponent {
       this.selectedCategorySlug = params['category'] ? params['category'].split(',') : [];
     });
     
-    this.category$.subscribe(res => this.categories = res.data.map(category => category ));
+    this.category$.subscribe(res => {
+      // If no categoryIds specified, show all categories (including Snowfall Collection)
+      if (!this.categoryIds || this.categoryIds.length === 0) {
+        this.categories = res.data.map(category => category);
+      }
+    });
 
   }
 
   ngOnChanges() {
     if(this.categoryIds && this.categoryIds.length) {
-      this.category$.subscribe(res => this.categories = res.data.filter(category => this.categoryIds?.includes(category.id)));
+      this.category$.subscribe(res => {
+        // Always include category 69 (Snowfall Collection) even if not in categoryIds
+        const categoryIdsWithSnowfall = [...new Set([...this.categoryIds, 69])];
+        this.categories = res.data.filter(category => categoryIdsWithSnowfall.includes(category.id));
+      });
     }
   }
 
