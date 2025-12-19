@@ -1,0 +1,127 @@
+.range-filter-wrapper {
+  padding: 15px 0;
+
+  .price-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: var(--text-color, #333);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+
+        &:focus {
+          outline: none;
+          border-color: var(--theme-color, #0da487);
+          box-shadow: 0 0 0 0.2rem rgba(13, 164, 135, 0.25);
+        }
+      }
+    }
+  }
+
+  .range-sliders {
+    margin-bottom: 20px;
+
+    .range-slider-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: var(--text-color, #333);
+      }
+
+      .form-range {
+        width: 100%;
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 5px;
+        outline: none;
+        -webkit-appearance: none;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          background: var(--theme-color, #0da487);
+          border-radius: 50%;
+          cursor: pointer;
+          border: 2px solid #fff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        &::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          background: var(--theme-color, #0da487);
+          border-radius: 50%;
+          cursor: pointer;
+          border: 2px solid #fff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        &::-webkit-slider-runnable-track {
+          height: 8px;
+          background: #e9ecef;
+          border-radius: 5px;
+        }
+
+        &::-moz-range-track {
+          height: 8px;
+          background: #e9ecef;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .price-display {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+
+    .price-range-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--theme-color, #0da487);
+    }
+  }
+
+  .filter-actions {
+    text-align: center;
+
+    .btn {
+      padding: 6px 20px;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: var(--theme-color, #0da487);
+        color: #fff;
+        border-color: var(--theme-color, #0da487);
+      }
+    }
+  }
+}
+
