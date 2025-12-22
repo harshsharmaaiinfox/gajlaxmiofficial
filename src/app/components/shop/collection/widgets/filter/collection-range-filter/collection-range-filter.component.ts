@@ -12,9 +12,9 @@ export class CollectionRangeFilterComponent implements OnChanges {
   @Input() filter: Params;
 
   public minPrice: number = 0;
-  public maxPrice: number = 15000;
+  public maxPrice: number = 8000;
   public selectedMinPrice: number = 0;
-  public selectedMaxPrice: number = 15000;
+  public selectedMaxPrice: number = 8000;
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
