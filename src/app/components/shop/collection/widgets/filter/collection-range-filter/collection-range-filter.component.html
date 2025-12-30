@@ -1,7 +1,7 @@
 <div class="range-filter-wrapper">
   <div class="price-inputs">
     <div class="input-group">
-      <label>{{ 'Min Price' | translate }}</label>
+      <label>{{ 'Min' | translate }}</label>
       <input 
         type="number" 
         class="form-control" 
@@ -12,7 +12,7 @@
         (blur)="onMinPriceChange($event)">
     </div>
     <div class="input-group">
-      <label>{{ 'Max Price' | translate }}</label>
+      <label>{{ 'max' | translate }}</label>
       <input 
         type="number" 
         class="form-control" 
@@ -25,25 +25,22 @@
   </div>
   
   <div class="range-sliders">
-    <div class="range-slider-group">
-      <label>{{ 'Min' | translate }}: {{ selectedMinPrice | currencySymbol }}</label>
-      <input 
-        type="range" 
-        class="form-range" 
-        [min]="minPrice" 
-        [max]="maxPrice"
-        [value]="selectedMinPrice"
-        (input)="onMinRangeChange($event)">
-    </div>
-    <div class="range-slider-group">
-      <label>{{ 'Max' | translate }}: {{ selectedMaxPrice | currencySymbol }}</label>
-      <input 
-        type="range" 
-        class="form-range" 
-        [min]="minPrice" 
+    <div class="dual-range-slider">
+      <div class="slider-track"></div>
+      <input
+        type="range"
+        class="range-max form-range"
+        [min]="minPrice"
         [max]="maxPrice"
         [value]="selectedMaxPrice"
         (input)="onMaxRangeChange($event)">
+      <input
+        type="range"
+        class="range-min form-range"
+        [min]="minPrice"
+        [max]="maxPrice"
+        [value]="selectedMinPrice"
+        (input)="onMinRangeChange($event)">
     </div>
   </div>
 
