@@ -32,16 +32,18 @@ export class ParisComponent implements OnInit, OnDestroy {
   public autoSlideInterval: any;
   public isPaused = false;
   public bannerImages = [
-    
+
     {
       src: 'assets/images/gajlaxmifashion.jpg',
-      alt: 'Soft Fabrics Strong Style'
+      alt: 'Soft Fabrics Strong Style',
+      url: '/collections?category=winter-collections&sortBy=asc'
     },
     {
       src: 'assets/images/Gajlaxmi 2.jpg',
-      alt: 'New Arrival Winter Collection'
+      alt: 'New Arrival Winter Collection',
+      url: '/collections?category=winter-collections&sortBy=asc'
     }
-   
+
   ];
 
   constructor(private store: Store,

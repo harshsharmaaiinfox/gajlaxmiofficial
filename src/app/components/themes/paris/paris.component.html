@@ -9,7 +9,7 @@
           *ngFor="let banner of bannerImages; let i = index"
           class="banner-slide"
           [class.active]="i === currentSlide">
-          <a href="/collections?sortBy=asc" [title]="banner.alt">
+          <a [href]="banner.url" [title]="banner.alt">
             <img 
               [src]="banner.src" 
               [alt]="banner.alt" 
