@@ -18,6 +18,7 @@ export class CollectionFilterComponent implements OnChanges {
     tag: [],
     rating: [],
     price: [],
+    size: [],
     attribute: []
   };
 
@@ -31,6 +32,7 @@ export class CollectionFilterComponent implements OnChanges {
       tag: this.splitFilter('tag'),
       rating: this.splitFilter('rating'),
       price: this.splitFilter('price'),
+      size: this.splitFilter('size'),
       attribute: this.splitFilter('attribute')
     };
 
@@ -81,6 +83,7 @@ export class CollectionFilterComponent implements OnChanges {
       ...this.filtersObj['tag'],
       ...this.filtersObj['rating'].map(val => val.startsWith('rating ') ? val : `rating ${val}`),
       ...this.filtersObj['price'],
+      ...this.filtersObj['size'],
       ...this.filtersObj['attribute']
     ];
   }

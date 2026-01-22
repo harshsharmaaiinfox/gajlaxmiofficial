@@ -38,6 +38,7 @@ export class CollectionComponent {
     'sort': 'asc', // ASC, DSC
     'sortBy': 'asc',
     'rating': '',
+    'size': '',
     'attribute': ''
   };
 
@@ -59,6 +60,7 @@ export class CollectionComponent {
         'field': params['field'] ? params['field'] : this.filter['field'],
         'sortBy': params['sortBy'] ? params['sortBy'] : this.filter['sortBy'],
         'rating': params['rating'] ? params['rating'] : '',
+        'size': params['size'] ? params['size'] : '',
         'attribute': params['attribute'] ? params['attribute'] : '',
       }
 
