@@ -1,0 +1,12 @@
+<div class="size-filter">
+  <div class="form-check" *ngFor="let size of sizes">
+    <input class="checkbox_animated" type="checkbox"
+        id="size-{{size}}"
+        [value]="size"
+        [checked]="checked(size)"
+        (change)="applyFilter($event)">
+    <label class="form-check-label" for="size-{{size}}">
+        {{ size }}
+    </label>
+  </div>
+</div>
