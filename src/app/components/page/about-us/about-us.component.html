@@ -1,228 +1,118 @@
-<!-- Fresh Vegetable Section Start -->
 <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
 
-<section class="fresh-vegetable-section section-lg-space" *ngIf="aboutUs?.about?.futures?.length && (aboutUs?.about?.content_left_image_url || aboutUs?.about?.content_right_image_url)">
-    <div class="container-fluid-lg">
-        <div class="row gx-xl-5 gy-xl-0 g-3 ratio_148_1">
-            <div class="col-xl-6 col-12">
-                <div class="row g-sm-4 g-2">
-                    <div class="col-6">
-                        <div class="fresh-image-2">
-                            <div>
-                                <img [src]="storageURL + aboutUs?.about?.content_left_image_url" class="bg-img " alt="image">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="fresh-image">
-                            <div>
-                                <img [src]="storageURL + aboutUs?.about?.content_right_image_url" class="bg-img " alt="image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-6 col-12">
-                <div class="fresh-contain p-center-left">
-                    <div>
-                        <div class="review-title">
-                            <h4>{{ aboutUs?.about?.sub_title }}</h4>
-                            <h2>{{ aboutUs?.about?.title }}</h2>
-                        </div>
-
-                        <div class="delivery-list">
-                            <p class="text-content">{{ aboutUs?.about?.description }}</p>
-
-                            <ul class="delivery-box">
-                                <li *ngFor="let futures of aboutUs?.about?.futures">
-                                    <div class="delivery-box">
-                                        <div class="delivery-icon">
-                                            <img [src]="storageURL + futures.icon" alt="icon">
-                                        </div>
-                                        <div class="delivery-detail">
-                                            <h5 class="text">{{ futures.title }}</h5>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Fresh Vegetable Section End -->
-
-<!-- Client Section Start -->
-<section class="client-section section-lg-space" *ngIf="aboutUs?.clients?.status && aboutUs?.clients?.content?.length && (aboutUs?.clients?.sub_title || aboutUs?.clients?.title)">
+<section class="about-us-section section-lg-space">
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12">
-                <div class="about-us-title text-center">
-                    <h4>{{ aboutUs?.clients?.sub_title }}</h4>
-                    <h2 class="center">{{ aboutUs?.clients?.title }}</h2>
-                </div>
-                <div class="slider-dots">
-                <owl-carousel-o [options]="clientsOptions">
-                    <ng-template carouselSlide *ngFor="let client of aboutUs?.clients?.content">
-                    <div class="slider-3_1 product-wrapper">
-                        <div>
-                            <div class="clint-contain">
-                                <div class="client-icon">
-                                    <img [src]="storageURL + client.icon" [alt]="client.title">
-                                </div>
-                                <h4>{{ client.title }}</h4>
-                                <p>{{ client.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    </ng-template>
-                </owl-carousel-o>
-                </div>
+                <h1>About GajLaxmi Fashion – Trendy Men’s & Women’s Clothing Online
+                </h1>
+                <p>Welcome to <a href="https://gajlaxmifashion.in/"><strong>GajLaxmi Fashion</strong></a>, we are
+                    passionate about bringing trendy, stylish, and affordable clothing to men and women across India.
+                    Our online fashion store is designed to offer a wide selection of outfits that help you look
+                    confident, feel comfortable, and stay on-trendwhether it’s for daily wear, office, casual outings,
+                    or special occasions.</p>
+                <p>We understand that clothing is more than just fabric; it’s an expression of your personality and
+                    lifestyle. That’s why every collection is thoughtfully curated to combine modern fashion trends,
+                    premium-quality fabrics, and lasting comfort. With GajLaxmi Fashion, you can find clothing that
+                    reflects your style, enhances your confidence, and fits your budget.</p>
+
+                <h2>Our Mission</h2>
+                <p>Our mission is to make fashion accessible to everyone by offering clothing that balances style,
+                    comfort, and affordability. We understand that people want outfits that look great while also
+                    feeling comfortable throughout the day.</p>
+                <p>At GajLaxmi Fashion, we focus on selecting clothing that fits naturally into everyday life. From
+                    relaxed casual wear to elegant ethnic styles, every product in our collection is chosen with the
+                    customer in mind. We aim to create a shopping experience where people can easily find clothing that
+                    fits their lifestyle, personal taste, and budget.</p>
+                <p>By offering a variety of options and updating our collections regularly, we work to ensure our
+                    customers always have access to fresh fashion choices and <a
+                        href="https://gajlaxmifashion.in/collections?category=women&page=3"><strong>versatile
+                            outfits</strong></a>.</p>
+
+                <h2>Our Vision</h2>
+                <p>The vision behind GajLaxmi Fashion is to grow into a trusted online destination for men’s and women’s
+                    fashion in India. We want our customers to think of GajLaxmi whenever they look for stylish clothing
+                    that combines good design with everyday comfort.</p>
+                <p>We aim to build a brand known for reliable quality, fair pricing, and customer satisfaction. As we
+                    continue to grow, our focus remains on understanding what our customers want and providing clothing
+                    that meets those expectations.</p>
+                <p>Fashion should inspire confidence, and our long-term goal is to help people feel comfortable and
+                    confident in what they wear.</p>
+
+                <h2>What You Can Find at GajLaxmi Fashion</h2>
+                <p>Our store offers a wide variety of clothing options for both men and women. We carefully choose
+                    pieces that combine style, practicality, and comfort so they can be worn on different occasions.</p>
+
+                <h4><a href="https://gajlaxmifashion.in/collections?category/women"><strong>Women’s Fashion</strong></a>
+                </h4>
+                <p>Our women’s collection includes outfits designed for both everyday wear and special moments.</p>
+                <p>You can explore items such as sarees, dresses, tops, suit sets, and coordinated outfits. These styles
+                    are suitable for casual outings, workdays, celebrations, and festive occasions.</p>
+                <p>The designs focus on comfort and elegance so women can enjoy clothing that feels good to wear while
+                    still looking fashionable.</p>
+
+                <h4><a href="https://gajlaxmifashion.in/collections?category/men"><strong>Men’s Fashion</strong></a>
+                </h4>
+                <p>For men, GajLaxmi Fashion provides clothing that fits well into daily routines and social occasions.
+                </p>
+                <p>Our range includes casual shirts, comfortable t-shirts, trousers, and traditional outfits that can be
+                    worn during festivals or family gatherings. Each piece is selected to provide a balance between
+                    modern style and practical wearability.</p>
+                <p>Whether someone prefers simple everyday clothing or something more refined, our men’s collection
+                    offers versatile options.</p>
+
+                <h2>Why Customers Choose <a href="https://gajlaxmifashion.in/"><strong>GajLaxmi Fashion</strong></a>
+                </h2>
+                <p>There are several reasons why shoppers choose GajLaxmi Fashion when looking for clothing online.</p>
+
+                <ul>
+                    <li><strong>Wide Variety of Clothing</strong>: Our store offers fashion for both men and women,
+                        covering casual wear, ethnic styles, and occasion-ready outfits.</li>
+                    <li><strong>Affordable Fashion Choices</strong>: We believe that good style should not come with an
+                        expensive price tag. Our goal is to provide clothing options that fit different budgets.</li>
+                    <li><a href="https://gajlaxmifashion.in/collections?category/activewear"><strong>Trendy & Stylish
+                                Collections</strong></a>: We stay ahead of fashion trends to bring you outfits that make
+                        a statement.</li>
+                    <li><strong>Comfort-Focused Designs</strong>: Comfort plays an important role in fashion. We choose
+                        fabrics and designs that allow customers to move freely and feel relaxed throughout the day.
+                    </li>
+                    <li><strong>Regularly Updated Collections</strong>: Fashion trends change quickly. That’s why we
+                        regularly add new styles and seasonal collections so customers can discover something new
+                        whenever they visit.</li>
+                    <li><strong>Simple Online Shopping Experience</strong>: We work to make browsing and purchasing
+                        clothing online as smooth as possible, allowing customers to explore products easily and find
+                        what they need without hassle.</li>
+                </ul>
+
+                <h2>Our Commitment to Quality</h2>
+                <p>At GajLaxmi Fashion, quality is a priority. We pay attention to fabric selection, stitching, and
+                    overall design to ensure every item offers both durability and comfort.</p>
+                <p>Clothing should not only look good when you buy it, but also remain comfortable and presentable after
+                    regular use. For that reason, we focus on offering pieces that combine style with long-lasting
+                    wearability.</p>
+                <p>We continuously evaluate our collections to maintain the standards our customers expect.</p>
+
+                <h2>Our Story</h2>
+                <p>The idea behind GajLaxmi Fashion started with a simple goal to create an online place where people
+                    could easily find stylish clothing for <a
+                        href="https://gajlaxmifashion.in/collections?category/men,women"><strong>men and
+                            women</strong></a> without spending too much time or money.</p>
+                <p>Many shoppers struggle to find clothing that balances modern style with affordability. By building a
+                    platform that brings together different clothing categories in one place, we aim to make fashion
+                    more accessible and convenient.</p>
+                <p>Since the beginning, our focus has remained on customer satisfaction, fashion variety, and consistent
+                    quality. As we grow, we continue working toward improving our collections and offering better
+                    choices for our customers.</p>
+
+                <h2>Discover Your Style with GajLaxmi Fashion</h2>
+                <p>Fashion should feel enjoyable and personal. At GajLaxmi Fashion, we want every customer to find
+                    clothing that reflects their taste and fits comfortably into their lifestyle.</p>
+                <p>From elegant sarees and stylish dresses to comfortable men’s wear and everyday outfits, our store
+                    brings together a variety of clothing designed to suit different needs and occasions.</p>
+                <p>If you are looking for trendy, comfortable, and affordable clothing online, <a
+                        href="https://gajlaxmifashion.in/"><strong>GajLaxmi Fashion</strong></a> is here to help you
+                    explore styles that match your personality and everyday life.</p>
             </div>
         </div>
     </div>
 </section>
-<!-- Client Section End -->
-
-<!-- Team Section Start -->
-<section class="team-section section-lg-space" *ngIf="aboutUs?.team?.status && aboutUs?.team?.members?.length && (aboutUs?.team?.sub_title || aboutUs?.team?.title)">
-    <div class="container-fluid-lg">
-        <div class="about-us-title text-center">
-            <h4 class="text-content">{{ aboutUs?.team?.sub_title }}</h4>
-            <h2 class="center">{{ aboutUs?.team?.title }}</h2>
-        </div>
-        <div class="row">
-            <div class="col-12">
-            <div class="slider-dots">
-                <owl-carousel-o [options]="teamOptions">
-                <ng-template carouselSlide *ngFor="let team of aboutUs?.team?.members">
-                    <div>
-                        <div class="team-box">
-                            <div class="team-iamge">
-                                <img [src]="storageURL + team?.profile_image_url" class="img-fluid "
-                                    [alt]="team?.name">
-                            </div>
-                            <div class="team-name">
-                                <h3>{{ team?.name }}</h3>
-                                <h5>{{ team?.designation }}</h5>
-                                <p>{{ team?.description }}</p>
-                                <ul class="team-media">
-                                    <li *ngIf="team?.facebook">
-                                        <a href="{{ team?.facebook }}" class="fb-bg">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                    </li>
-
-                                    <li *ngIf="team?.pinterest">
-                                        <a href="{{ team?.pinterest }}" class="pint-bg">
-                                            <i class="ri-pinterest-fill"></i>
-                                        </a>
-                                    </li>
-
-                                    <li *ngIf="team?.twitter">
-                                        <a href="{{ team?.twitter }}" class="twitter-bg">
-                                            <i class="ri-twitter-fill"></i>
-                                        </a>
-                                    </li>
-
-                                    <li *ngIf="team?.instagram">
-                                        <a href="{{ team?.instagram }}" class="insta-bg">
-                                            <i class="ri-instagram-fill"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                </owl-carousel-o>
-            </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Team Section End -->
-
-<!-- Review Section Start -->
-<section class="review-section section-lg-space" *ngIf="aboutUs?.testimonial?.status && aboutUs?.testimonial?.reviews?.length && (aboutUs?.testimonial?.sub_title || aboutUs?.testimonial?.title)">
-    <div class="container-fluid" >
-        <div class="about-us-title text-center">
-            <h4 class="text-content">{{ aboutUs?.testimonial?.sub_title }}</h4>
-            <h2 class="center">{{ aboutUs?.testimonial?.title }}</h2>
-        </div>
-        <div class="row">
-            <div class="col-12">
-            <div class="slider-dots">
-                <owl-carousel-o [options]="testimonialsOptions">
-                    <ng-template carouselSlide *ngFor="let team of aboutUs?.testimonial?.reviews">
-                    <div>
-                        <div class="reviewer-box">
-                            <i class="ri-double-quotes-r"></i>
-                            <h3>{{ team?.title }}</h3>
-                            <p>"{{ team?.review }}"</p>
-                            <div class="reviewer-profile">
-                                <div class="reviewer-image">
-                                    <img [src]="storageURL + team?.profile_image_url" alt="image">
-                                </div>
-                                <div class="reviewer-name">
-                                    <h4>{{ team?.name }}</h4>
-                                    <h6>{{ team?.designation }}</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </ng-template>
-                </owl-carousel-o>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Review Section End -->
-
-<!-- Blog Section Start -->
-<section class="section-lg-space" *ngIf="aboutUs?.blog?.status">
-    <div class="container-fluid-lg">
-        <div class="about-us-title text-center">
-            <h4 class="text-content">{{ 'our_blog' | translate }}</h4>
-            <h2 class="center">{{ 'our_latest_blog' | translate }}</h2>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="slider-dots">
-                    <owl-carousel-o [options]="blogOptions">
-                        <ng-template carouselSlide *ngFor="let blog of blogs">
-                        <div >
-                            <div class="blog-box">
-                                <div class="blog-box-image">
-                                    <div class="blog-image">
-                                        <a [routerLink]="['/blog/', blog.slug]">
-                                        <img [src]="blog.blog_thumbnail.original_url
-                                                ? blog.blog_thumbnail.original_url
-                                                : 'assets/images/blog.png'" [alt]="blog.title">
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <a [routerLink]="['/blog/', blog.slug]" class="blog-detail d-block">
-                                    <h6>{{ blog.created_by.name }}</h6>
-                                    <h5>{{ blog.title }}</h5>
-                                </a>
-                            </div>
-                        </div>
-                        </ng-template>
-                    </owl-carousel-o>
-                    <app-no-data
-                    [class]="'no-data-added bg-light'"
-                    [text]="'no_blog_found'"
-                    *ngIf="!blogs?.length">
-                    </app-no-data>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Blog Section End -->

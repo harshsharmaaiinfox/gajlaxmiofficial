@@ -10,6 +10,12 @@ export const content: Routes = [
     title: 'Gajlaxmi Fashion – Elegant Indian Ethnic Wear Online'
   },
   {
+    path: 'about-us',
+    loadChildren: () =>
+      import('../../components/page/about-us/about-us.module').then((m) => m.AboutUsModule),
+    title: 'About Us | Gajlaxmi Fashion'
+  },
+  {
     path: 'privacy-policy',
     loadChildren: () =>
       import('../../privacy-policy/privacy-policy.module').then((m) => m.PrivacyPolicyModule),
@@ -72,7 +78,7 @@ export const content: Routes = [
     title: 'Gajlaxmi Blog – Fashion Tips & News'
   },
   {
-    path: "pages",
+    path: "page",
     loadChildren: () =>
       import("../../components/page/page.module").then((m) => m.PagesModule),
     title: 'Explore Gajlaxmi – About, Help & More'

@@ -4,7 +4,7 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="footer-logo">
                     <app-footer-logo [data]="data" [footer]="footer"></app-footer-logo>
-                   
+
                     <!-- <div class="footer-title contact-title">
                         <h4>{{ 'Contact Us' | translate }}</h4>
                     </div> -->
@@ -23,40 +23,40 @@
                     <app-no-data [class]="'no-data-footer'" [text]="'no_category_found'" *ngIf="!data?.footer?.footer_categories?.length"></app-no-data>
                 </div>
             </div> -->
-            <div class="col-xl-2 col-lg-2 col-sm-3"
-                (click)="toggle('useful_link')">
+            <div class="col-xl-2 col-lg-2 col-sm-3" (click)="toggle('useful_link')">
                 <div class="footer-title" [class.show]="active['useful_link']">
                     <h4>{{ 'Useful Links' | translate }}</h4>
                 </div>
                 <div class="footer-contain">
                     <!-- <app-footer-links [links]="data?.footer?.useful_link || []"></app-footer-links> -->
-                     <ul>
+                    <ul>
                         <li><a href="/privacy-policy">Privacy Policy</a></li>
                         <li><a href="/term-condition">Terms and Conditions</a></li>
                         <li><a href="/shipping-delivery">Shipping Policy</a></li>
                         <li><a href="/return-exchange">Return Policy</a></li>
                         <li><a href="/refund-and-cancellation">Refund and Cancellation</a></li>
-                        <li><a href="/page/about-us">About Us</a></li>
+                        <li><a href="/about-us">About Us</a></li>
                         <li><a href="/contactus">Contact Us</a></li>
-                     </ul>
+                    </ul>
                     <!-- No Data -->
-                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.useful_link?.length"></app-no-data>
+                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'"
+                        *ngIf="!data?.footer?.useful_link?.length"></app-no-data>
                 </div>
             </div>
-            <div class="col-xl-2 col-sm-3"
-                (click)="toggle('help_center')">
+            <div class="col-xl-2 col-sm-3" (click)="toggle('help_center')">
                 <div class="footer-title" [class.show]="active['help_center']">
                     <h4>{{ 'Help Center' | translate }}</h4>
                 </div>
                 <div class="footer-contain">
                     <app-footer-links [links]="data?.footer?.help_center || []"></app-footer-links>
                     <!-- No Data -->
-                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'" *ngIf="!data?.footer?.help_center?.length"></app-no-data>
+                    <app-no-data [class]="'no-data-footer'" [text]="'no_link_found'"
+                        *ngIf="!data?.footer?.help_center?.length"></app-no-data>
                 </div>
             </div>
-           <div class="col-xl-5">
-            <app-footer-about [data]="data"></app-footer-about>
-           </div>
+            <div class="col-xl-5">
+                <app-footer-about [data]="data"></app-footer-about>
+            </div>
         </div>
     </div>
     <div class="sub-footer section-small-space">
@@ -67,5 +67,78 @@
             <app-footer-payment-options></app-footer-payment-options>
         </div> -->
         <app-footer-social-links [data]="data" *ngIf="data?.footer?.social_media_enable"></app-footer-social-links>
+    </div>
+    <div class="footer-seo-section section-b-space">
+        <h2>Discover Affordable Men’s & Women’s Fashion Online at GajLaxmi Fashion</h2>
+        <p>Welcome to <strong>GajLaxmi Fashion</strong>, your modern destination for stylish, comfortable, and
+            affordable clothing for men and women in India. Whether you’re looking for <b>elegant ethnic wear</b>,
+            <a href="/product/solid-straight-fit-set-ronuo-olive">trendy women’s outfits</a>, or comfortable men’s
+            casual clothing, GajLaxmi Fashion offers a wide collection designed to match every lifestyle and
+            occasion.
+        </p>
+        <p>Our mission is to make <b>high-quality fashion</b> accessible to everyone. From traditional outfits to
+            modern everyday wear, our collections combine style, comfort, and affordability so you can look
+            confident and fashionable wherever you go.</p>
+
+        <h3>Shop Stylish Ethnic Wear for Women</h3>
+        <p>Explore our beautiful collection of <a href="/category/women">women’s ethnic wear online</a>, designed to
+            celebrate tradition with a modern touch. At <strong>GajLaxmi Fashion</strong>, you can discover a wide
+            range of sarees, suit sets, kurtis, and festive outfits perfect for weddings, festivals, family
+            gatherings, and everyday elegance.</p>
+        <p>Our ethnic wear collection features <b>vibrant colors</b>, <b>elegant prints</b>, and <b>comfortable
+                fabrics</b>, making it easy to find outfits that look stunning and feel comfortable. Whether you’re
+            searching for <b>affordable sarees online</b> or <b>stylish women’s suit sets</b>, our collection offers
+            something for every style and occasion.</p>
+
+        <h3>Trendy Women’s Clothing for Everyday Style</h3>
+        <p>Fashion should be <b>comfortable and versatile</b> for everyday life. Our women’s collection includes
+            <b>stylish tops</b>, <b>fashionable dresses</b>, and <b>comfortable casual wear</b> designed for modern
+            lifestyles.
+        </p>
+        <p>Whether you're heading to work, meeting friends, or enjoying a casual day out, our outfits provide the
+            perfect combination of comfort, trend, and flattering fit. Discover <b>trendy tops for women</b>,
+            <b>elegant dresses</b>, and <b>everyday fashion essentials</b> that keep your wardrobe fresh and
+            stylish.
+        </p>
+
+        <h3>Comfortable and Stylish Men’s Clothing</h3>
+        <p>At <strong>GajLaxmi Fashion</strong>, we also offer a growing range of <a href="/category/men">men’s
+                clothing online</a> designed for both comfort and style. Our collection includes <b>men’s
+                t-shirts</b>, <b>trackpants</b>, <b>casual shirts</b>, and <b>everyday wear</b> perfect for active
+            days and relaxed weekends.</p>
+        <p>Each piece is selected with attention to <b>quality fabrics</b>, <b>modern fits</b>, and <b>durable
+                designs</b>, ensuring you get clothing that looks great and feels comfortable throughout the day.
+            Whether you're upgrading your casual wardrobe or looking for comfortable daily outfits, our men’s
+            collection offers practical and stylish choices.</p>
+
+        <h3>Elegant Sarees for Special Occasions</h3>
+        <p>Sarees remain one of the most timeless and graceful outfits in Indian fashion. At <strong>GajLaxmi
+                Fashion</strong>, we offer a wide variety of <b>affordable sarees online</b> designed for festivals,
+            celebrations, parties, and everyday elegance.</p>
+        <p>From classic designs to modern prints, our saree collection combines traditional craftsmanship with
+            contemporary style, helping you create <b>beautiful looks</b> for every special moment.</p>
+
+        <h3>Why Shop at GajLaxmi Fashion?</h3>
+        <ul class="seo-benefits-list">
+            <li>✔ <b>Wide collection</b> of men’s and women’s clothing online</li>
+            <li>✔ <b>Beautiful sarees</b>, suit sets, tops, and casual outfits</li>
+            <li>✔ <b>Comfortable fabrics</b> designed for daily wear</li>
+            <li>✔ <b>Affordable fashion</b> without compromising quality</li>
+            <li>✔ <b>Easy online shopping</b> with secure checkout</li>
+            <li>✔ <b>New arrivals</b> and trending styles added regularly</li>
+        </ul>
+        <p>At <strong>GajLaxmi Fashion</strong>, we believe fashion should be stylish, comfortable, and accessible
+            to everyone.</p>
+
+        <h3>Shop Trending Fashion Online in India</h3>
+        <p>Whether you're searching for <b>women’s ethnic wear online</b>, <a
+                href="/product/saree-with-sangria-sensation-classic-blouse">affordable sarees</a>, <b>stylish tops
+                for women</b>, or <b>comfortable men’s clothing</b>, GajLaxmi Fashion is your one-stop destination
+            for modern and traditional fashion.</p>
+        <p>Explore the latest trends, discover <b>high-quality clothing</b>, and upgrade your wardrobe with outfits
+            designed to suit every occasion. Our collections are constantly updated so you can always stay ahead in
+            style.</p>
+        <p>Start shopping today and experience fashion that combines <b>comfort, quality, and affordability</b> only
+            at <a href="/">GajLaxmi Fashion</a>.</p>
     </div>
 </div>

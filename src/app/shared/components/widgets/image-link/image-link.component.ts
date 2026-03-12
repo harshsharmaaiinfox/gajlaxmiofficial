@@ -18,16 +18,19 @@ export class ImageLinkComponent {
   @Input() link: string;
   @Input() bgImage: boolean;
   @Input() class: string;
+  @Input() lazy: boolean = true;
+  @Input() fetchpriority: 'high' | 'low' | 'auto' = 'auto';
+
 
   public storageURL = environment.storageURL;
-  
-  constructor(){}
 
-  getProductSlug(id: number, products: Product[]){
+  constructor() { }
+
+  getProductSlug(id: number, products: Product[]) {
     let product = products.find(product => product.id === id);
     return product ? product.slug : null;
   }
 
 
-  
+
 }

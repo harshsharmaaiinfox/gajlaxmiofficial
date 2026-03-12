@@ -1,68 +1,70 @@
 <div class="bg-effect">
-    <!-- Banner Slider Start -->
-<section class="banner-section pt-0 pb-3">
-  <div class="container-fluid-lg">
-    <div class="banner-slider-container position-relative">
-      <!-- Banner Images -->
-      <div class="banner-slides">
-        <div 
-          *ngFor="let banner of bannerImages; let i = index"
-          class="banner-slide"
-          [class.active]="i === currentSlide">
-          <a [href]="banner.url" [title]="banner.alt">
-            <img 
-              [src]="banner.src" 
-              [alt]="banner.alt" 
-              class="img-fluid w-100" 
-              loading="lazy"
-              [title]="banner.alt">
-            <span class="sr-only">{{ banner.alt }}</span>
-          </a>
+  <!-- Banner Slider Start -->
+  <section class="banner-section pt-0 pb-3">
+    <div class="container-fluid-lg">
+      <div class="banner-slider-container position-relative">
+        <!-- Banner Images -->
+        <div class="banner-slides">
+          <div *ngFor="let banner of bannerImages; let i = index" class="banner-slide"
+            [class.active]="i === currentSlide">
+            <a [href]="banner.url" [title]="banner.alt">
+              <img [src]="banner.src" [alt]="banner.alt" class="img-fluid w-100"
+                [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
+                decoding="async" [title]="banner.alt">
+              <span class="sr-only">{{ banner.alt }}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="slider-nav slider-nav-prev" (click)="previousSlide()" (mouseenter)="pauseAutoSlide()"
+          (mouseleave)="resumeAutoSlide()" [attr.aria-label]="'Previous slide'" title="Previous slide">
+          <span class="arrow-left"></span>
+          <span class="sr-only">Previous slide</span>
+        </button>
+
+        <button class="slider-nav slider-nav-next" (click)="nextSlide()" (mouseenter)="pauseAutoSlide()"
+          (mouseleave)="resumeAutoSlide()" [attr.aria-label]="'Next slide'" title="Next slide">
+          <span class="arrow-right"></span>
+          <span class="sr-only">Next slide</span>
+        </button>
+
+        <!-- Dots Indicator -->
+        <div class="slider-dots">
+          <button *ngFor="let banner of bannerImages; let i = index" class="dot" [class.active]="i === currentSlide"
+            (click)="goToSlide(i)" (mouseenter)="pauseAutoSlide()" (mouseleave)="resumeAutoSlide()"
+            [attr.aria-label]="'Go to slide ' + (i + 1)" [title]="'Go to slide ' + (i + 1)">
+            <span class="sr-only">Slide {{ i + 1 }}</span>
+          </button>
         </div>
       </div>
+    </div>
+  </section>
+  <!-- Banner Slider End -->
 
-      <!-- Navigation Arrows -->
-      <button 
-        class="slider-nav slider-nav-prev" 
-        (click)="previousSlide()"
-        (mouseenter)="pauseAutoSlide()"
-        (mouseleave)="resumeAutoSlide()"
-        [attr.aria-label]="'Previous slide'"
-        title="Previous slide">
-        <span class="arrow-left"></span>
-        <span class="sr-only">Previous slide</span>
-      </button>
-      
-      <button 
-        class="slider-nav slider-nav-next" 
-        (click)="nextSlide()"
-        (mouseenter)="pauseAutoSlide()"
-        (mouseleave)="resumeAutoSlide()"
-        [attr.aria-label]="'Next slide'"
-        title="Next slide">
-        <span class="arrow-right"></span>
-        <span class="sr-only">Next slide</span>
-      </button>
-
-      <!-- Dots Indicator -->
-      <div class="slider-dots">
-        <button 
-          *ngFor="let banner of bannerImages; let i = index"
-          class="dot"
-          [class.active]="i === currentSlide"
-          (click)="goToSlide(i)"
-          (mouseenter)="pauseAutoSlide()"
-          (mouseleave)="resumeAutoSlide()"
-          [attr.aria-label]="'Go to slide ' + (i + 1)"
-          [title]="'Go to slide ' + (i + 1)">
-          <span class="sr-only">Slide {{ i + 1 }}</span>
-        </button>
+  <!-- Homepage SEO Section Start -->
+  <section class="home-seo-section section-b-space">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-12">
+          <div class="seo-content text-center">
+            <h1>Shop Men’s & Women’s Clothing Online in India – Trendy Fashion for Every Style</h1>
+            <p>Welcome to GajLaxmi Fashion, your online destination for stylish and affordable clothing for <a
+                [routerLink]="['/category/men']">men</a> and
+              <a [routerLink]="['/category/women']">women</a> in India. Explore a wide collection of fashionable outfits
+              including sarees, suit sets, dresses,
+              tops, and comfortable men’s wear designed for both everyday style and special occasions. At GajLaxmi
+              Fashion, we combine modern trends, quality fabrics, and comfort to bring you clothing that helps you look
+              confident and feel great in every season
+            </p>
+            <a href="/collections" class="btn btn-animation cta-button">Shop Now</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- Banner Section Start -->
-  
+  </section>
+  <!-- Homepage SEO Section End -->
+
   <!-- Home Section Start -->
   <!-- <section class="home-section pt-2" *ngIf="data?.content?.home_banner">
     <app-theme-home-banner [theme]="'paris'" [data]="data?.content?.home_banner"></app-theme-home-banner>
@@ -95,15 +97,12 @@
             </ng-container>
 
             <!-- Sidebar Vertical Banner -->
-            <app-theme-banner
-              [class]="'ratio_156 section-t-space'"
-              [style]="'vertical'"
+            <app-theme-banner [class]="'ratio_156 section-t-space'" [style]="'vertical'"
               [banners]="data?.content?.main_content?.sidebar?.left_side_banners?.banner_1">
             </app-theme-banner>
 
             <!-- Sidebar Vertical Banner -->
-            <app-theme-banner
-              [class]="'ratio_medium section-t-space'" [style]="'vertical'"
+            <app-theme-banner [class]="'ratio_medium section-t-space'" [style]="'vertical'"
               [banners]="data?.content?.main_content?.sidebar?.left_side_banners?.banner_2">
             </app-theme-banner>
 
@@ -112,8 +111,7 @@
               <div class="section-t-space">
                 <div class="category-menu">
                   <h3>{{ data?.content?.main_content?.sidebar?.sidebar_products?.title }}</h3>
-                  <app-theme-product
-                    [style]="'vertical'"
+                  <app-theme-product [style]="'vertical'"
                     [productIds]="data?.content?.main_content?.sidebar?.sidebar_products?.product_ids || []">
                   </app-theme-product>
                 </div>
@@ -128,16 +126,12 @@
 
           <!-- Top Save Today Section Start -->
           <ng-container *ngIf="data?.content?.main_content?.section1_products?.status">
-            <app-title
-              [title]="data?.content?.main_content?.section1_products?.title"
+            <app-title [title]="data?.content?.main_content?.section1_products?.title"
               [description]="data?.content?.main_content?.section1_products?.description">
             </app-title>
             <div class="section-b-space">
-              <app-theme-product
-                [productIds]="data?.content?.main_content?.section1_products?.product_ids || []"
-                [slider]="true"
-                [sliderOption]="productSlider"
-                [style]="'horizontal'">
+              <app-theme-product [productIds]="data?.content?.main_content?.section1_products?.product_ids || []"
+                [slider]="true" [sliderOption]="productSlider" [style]="'horizontal'">
               </app-theme-product>
             </div>
           </ng-container>
@@ -146,16 +140,13 @@
           <!-- Categories Section Start-->
           <ng-container *ngIf="data?.content?.main_content?.section2_categories_list?.status">
             <div>
-              <app-title
-                [title]="data?.content?.main_content?.section2_categories_list?.title"
+              <app-title [title]="data?.content?.main_content?.section2_categories_list?.title"
                 [description]="data?.content?.main_content?.section2_categories_list?.description">
               </app-title>
-              <app-theme-categories
-                [sliderOption]="categorySlider"
+              <app-theme-categories [sliderOption]="categorySlider"
                 [image]="data?.content?.main_content?.section2_categories_list?.image_url!"
                 [categoryIds]="data?.content?.main_content?.section2_categories_list?.category_ids || []"
-                [theme]="'paris'"
-                [style]="'horizontal'">
+                [theme]="'paris'" [style]="'horizontal'">
               </app-theme-categories>
             </div>
           </ng-container>
@@ -167,16 +158,14 @@
               <div class="row g-md-4 g-3">
                 <div class="col-md-6">
                   <div class="banner-contain hover-effect">
-                    <app-image-link 
-                      [image]="data?.content?.main_content?.section3_two_column_banners?.banner_1"
+                    <app-image-link [image]="data?.content?.main_content?.section3_two_column_banners?.banner_1"
                       [bgImage]="false">
                     </app-image-link>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="banner-contain hover-effect">
-                    <app-image-link 
-                      [image]="data?.content?.main_content?.section3_two_column_banners?.banner_2"
+                    <app-image-link [image]="data?.content?.main_content?.section3_two_column_banners?.banner_2"
                       [bgImage]="false">
                     </app-image-link>
                   </div>
@@ -185,20 +174,16 @@
             </div>
           </ng-container>
           <!-- Two Column Banner Section End-->
-              
+
 
           <!-- Section Start -->
           <ng-container *ngIf="data?.content?.main_content?.section4_products?.status">
-            <app-title
-              [title]="data?.content?.main_content?.section4_products?.title"
+            <app-title [title]="data?.content?.main_content?.section4_products?.title"
               [description]="data?.content?.main_content?.section4_products?.description">
             </app-title>
             <div class="section-b-space">
-              <app-theme-product
-                [productIds]="data?.content?.main_content?.section4_products?.product_ids || []"
-                [sliderOption]="productSlider"
-                [slider]="true"
-                [style]="'horizontal'">
+              <app-theme-product [productIds]="data?.content?.main_content?.section4_products?.product_ids || []"
+                [sliderOption]="productSlider" [slider]="true" [style]="'horizontal'">
               </app-theme-product>
             </div>
           </ng-container>
@@ -209,18 +194,16 @@
             <app-title [title]="data?.content?.main_content?.seller?.title"
               [description]="data?.content?.main_content?.seller?.description">
             </app-title>
-              <div class="section-b-space">
-                <app-top-seller [sellerIds]="data?.content?.main_content?.seller?.store_ids || []"></app-top-seller>
-              </div>
+            <div class="section-b-space">
+              <app-top-seller [sellerIds]="data?.content?.main_content?.seller?.store_ids || []"></app-top-seller>
+            </div>
           </ng-container>
           <!-- Top Seller End -->
 
           <!-- Coupons Banner Section Start -->
           <ng-container *ngIf="data?.content?.main_content?.section5_coupons?.status">
             <div class="section-b-space ratio_12">
-              <app-theme-banner
-                class="sale-banner"
-                [banners]="data?.content?.main_content?.section5_coupons"
+              <app-theme-banner class="sale-banner" [banners]="data?.content?.main_content?.section5_coupons"
                 [style]="'full_width'">
               </app-theme-banner>
             </div>
@@ -233,16 +216,14 @@
               <div class="row g-md-4 g-3">
                 <div class="col-xxl-8 col-xl-12 col-md-7">
                   <div class="banner-contain hover-effect">
-                    <app-image-link
-                      [image]="data?.content?.main_content?.section6_two_column_banners?.banner_1"
+                    <app-image-link [image]="data?.content?.main_content?.section6_two_column_banners?.banner_1"
                       [bgImage]="false">
                     </app-image-link>
                   </div>
                 </div>
                 <div class="col-xxl-4 col-xl-12 col-md-5">
                   <div class="banner-contain hover-effect">
-                    <app-image-link 
-                      [image]="data?.content?.main_content?.section6_two_column_banners?.banner_2"
+                    <app-image-link [image]="data?.content?.main_content?.section6_two_column_banners?.banner_2"
                       [bgImage]="false">
                     </app-image-link>
                   </div>
@@ -254,12 +235,10 @@
 
           <!-- Our Best Seller Section Start -->
           <ng-container *ngIf="data?.content?.main_content?.section4_products?.status">
-            <app-title
-              [title]="data?.content?.main_content?.section7_products?.title"
+            <app-title [title]="data?.content?.main_content?.section7_products?.title"
               [description]="data?.content?.main_content?.section7_products?.description">
             </app-title>
-            <app-theme-product
-              [productIds]="data?.content?.main_content?.section7_products?.product_ids || []"
+            <app-theme-product [productIds]="data?.content?.main_content?.section7_products?.product_ids || []"
               [style]="'classic'">
             </app-theme-product>
           </ng-container>
@@ -269,9 +248,7 @@
           <ng-container *ngIf="data?.content?.main_content?.section8_full_width_banner?.status">
             <div class="section-b-space section-t-space">
               <div class="banner-contain hover-effect">
-                <app-image-link 
-                  [image]="data?.content?.main_content?.section8_full_width_banner" 
-                  [bgImage]="false">
+                <app-image-link [image]="data?.content?.main_content?.section8_full_width_banner" [bgImage]="false">
                 </app-image-link>
               </div>
             </div>
@@ -280,12 +257,10 @@
 
           <!-- Blogs Section Start -->
           <ng-container *ngIf="data?.content?.main_content?.section9_featured_blogs?.status">
-            <app-title
-              [title]="data?.content?.main_content?.section9_featured_blogs?.title"
+            <app-title [title]="data?.content?.main_content?.section9_featured_blogs?.title"
               [description]="data?.content?.main_content?.section9_featured_blogs?.description">
             </app-title>
-            <app-blog
-              [blogIds]="data?.content?.main_content?.section9_featured_blogs?.blog_ids || []">
+            <app-blog [blogIds]="data?.content?.main_content?.section9_featured_blogs?.blog_ids || []">
             </app-blog>
           </ng-container>
           <!-- Blogs Section End -->
@@ -314,4 +289,3 @@
   </ng-container>
   <!-- Newsletter Section End -->
 </div>
- 

@@ -178,3 +178,82 @@
     }
   }
 }
+
+// Homepage SEO Section Styles
+.home-seo-section {
+  padding: 40px 0;
+  background: #fdfdfd; // Very subtle off-white background
+  border-bottom: 1px solid rgba(217, 159, 70, 0.1); // Subtle theme color border
+
+  .seo-content {
+    max-width: 900px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: calc(22px + (36 - 22) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 20px;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+      line-height: 1.7;
+      font-weight: 400;
+
+      a {
+        color: #d99f46; // Theme gold/yellow
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+          color: #222;
+          border-bottom: 1px solid #d99f46;
+        }
+      }
+    }
+
+    .cta-button {
+      padding: 14px 40px;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      display: inline-block;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+// Responsive adjustments for SEO section
+@media (max-width: 768px) {
+  .home-seo-section {
+    padding: 30px 0;
+
+    .seo-content {
+      padding: 0 15px;
+
+      p {
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+
+      .cta-button {
+        padding: 12px 30px;
+        font-size: 14px;
+      }
+    }
+  }
+}

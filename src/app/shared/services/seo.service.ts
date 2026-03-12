@@ -1,4 +1,5 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Select } from '@ngxs/store';
 import { Observable, filter } from 'rxjs';
 import { ThemeOptionState } from '../state/theme-option.state';
@@ -32,9 +33,9 @@ export class SeoService {
   @Select(CategoryState.selectedCategory) category$: Observable<Category>;
 
   // Default meta values
-  private readonly DEFAULT_TITLE = "Fashion Collection for Men and Women | Active Wear | Fashion Hub";
-  private readonly DEFAULT_DESCRIPTION = "Explore our latest fashion collections for men and women for real-life comfort, and look always trendy with latest men's clothing and the women's collection";
-  private readonly DEFAULT_KEYWORDS = "Fashion Collection for Men and Women";
+  private readonly DEFAULT_TITLE = "Buy Sarees Online India - Trendy Women's & Men's Clothing | GajLaxmi";
+  private readonly DEFAULT_DESCRIPTION = "Shop trendy women's clothing online at GajLaxmi. Buy sarees online India, kurta suit sets, and ethnic wear. Affordable fashion including dresses, tops, and men's wear.";
+  private readonly DEFAULT_KEYWORDS = "Buy sarees online India, Women clothing online India, Women ethnic wear online, Affordable fashion online India, Latest fashion for women online, Men clothing online India, Indian ethnic wear for women, Online clothing store India, Kurta suit set for women, Floral printed suit set, Cotton suit set for women, Chanderi lehenga set, Women sleeveless tops online, Stylish tops for women, Women ethnic suit online, Festival wear lehenga set, Silk sarees online India, Designer sarees for women, Traditional sarees online, Party wear sarees India, Men t shirts online India, Men gym jogger pants, Men workout shorts, Casual t shirts for men, Men gym clothing India, Athletic jogger pants for men, Affordable ethnic wear for women online, Buy kurta suit set online India, Stylish women tops under 1000, Best online clothing store for women India, Latest ethnic wear collection online, Buy gym clothing for men online India";
 
   public path: string;
   public timeoutId: any;
@@ -53,15 +54,31 @@ export class SeoService {
   public setting: Values;
   constructor(private meta: Meta, private router: Router,
     private titleService: Title,
-    private ngZone: NgZone,) { 
+    private ngZone: NgZone,
+    @Inject(DOCUMENT) private document: Document) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
       this.path = event.url
       this.updateSeo(this.path)
     });
-    
-    this.fetchData(); 
+
+    this.fetchData();
+  }
+
+  private updateCanonicalTag(url: string) {
+    // Remove query parameters
+    const urlObj = new URL(url, 'https://gajlaxmifashion.in');
+    const path = urlObj.pathname;
+    const cleanUrl = `https://gajlaxmifashion.in${path}`;
+
+    let link: HTMLLinkElement | null = this.document.querySelector("link[rel='canonical']");
+    if (!link) {
+      link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      this.document.head.appendChild(link);
+    }
+    link.setAttribute('href', cleanUrl);
   }
 
   fetchData() {
@@ -75,8 +92,8 @@ export class SeoService {
       this.themeOption = option
     })
   }
-  
-  updateSeo(path:string){
+
+  updateSeo(path: string) {
     if (path.includes('product')) {
       if (this.product) {
         this.scoContent = {
@@ -85,11 +102,12 @@ export class SeoService {
           'og_description': this.product.meta_description || this.themeOption?.seo?.meta_description || this.DEFAULT_DESCRIPTION,
           'og_image': this.product.product_meta_image?.original_url || this.themeOption?.seo?.og_image?.original_url,
         };
+        this.updateCanonicalTag(window.location.href);
       }
       this.customSCO();
     }
-    else if(path.includes('blog')) {
-      if(this.blog){
+    else if (path.includes('blog')) {
+      if (this.blog) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
@@ -100,8 +118,8 @@ export class SeoService {
         this.customSCO();
       }
     }
-    else if(path.includes('page')) {
-      if(this.page) {
+    else if (path.includes('page')) {
+      if (this.page) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
@@ -111,8 +129,8 @@ export class SeoService {
         }
       }
       this.customSCO();
-    } else if(path.includes('brand')) {
-      if(this.brand) {
+    } else if (path.includes('brand')) {
+      if (this.brand) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
@@ -122,8 +140,8 @@ export class SeoService {
         }
       }
       this.customSCO();
-    } else if(path.includes('category')) {
-      if(this.category) {
+    } else if (path.includes('category')) {
+      if (this.category) {
         this.scoContent = {
           ...this.scoContent,
           'url': window.location.href,
@@ -133,14 +151,15 @@ export class SeoService {
         }
       }
       this.customSCO();
-    } 
+    }
     else {
       this.updateDefaultSeo();
     }
   }
 
-  updateDefaultSeo(){
- 
+  updateDefaultSeo() {
+    this.updateCanonicalTag(window.location.href);
+
     this.meta.updateTag({ name: 'title', content: this.themeOption?.seo?.meta_title || this.DEFAULT_TITLE });
     this.meta.updateTag({ name: 'description', content: this.themeOption?.seo?.meta_description || this.DEFAULT_DESCRIPTION });
     this.meta.updateTag({ name: 'keywords', content: this.DEFAULT_KEYWORDS });
@@ -159,7 +178,7 @@ export class SeoService {
     this.meta.updateTag({ property: 'twitter:description', content: this.themeOption?.seo?.meta_description || this.DEFAULT_DESCRIPTION });
     this.meta.updateTag({ property: 'twitter:image', content: this.scoContent['og_image'] });
 
-    if(this.themeOption?.general && this.themeOption?.general?.exit_tagline_enable){
+    if (this.themeOption?.general && this.themeOption?.general?.exit_tagline_enable) {
       document.addEventListener('visibilitychange', () => {
         this.messages = this.themeOption.general.taglines;
         this.ngZone.run(() => {
@@ -180,16 +199,17 @@ export class SeoService {
         'og_description': this.themeOption?.seo?.meta_description || this.DEFAULT_DESCRIPTION,
         'og_image': this.themeOption?.seo?.og_image?.original_url,
       }
-      
+
       this.customSCO()
-    }else {
-      const siteTitle = this.themeOption?.general?.site_title || "Fashion Hub";
-      const siteTagline = this.themeOption?.general?.site_tagline || "Fashion Collection for Men and Women";
+    } else {
+      const siteTitle = this.themeOption?.general?.site_title || "GajLaxmi";
+      const siteTagline = this.themeOption?.general?.site_tagline || "Trendy Men's & Women's Clothing Online Store";
       return this.titleService.setTitle(`${siteTitle} | ${siteTagline}`);
     }
   }
- 
-  customSCO(){
+
+  customSCO() {
+    this.updateCanonicalTag(this.scoContent['url'] || window.location.href);
     const title = this.scoContent['og_title'] || this.DEFAULT_TITLE;
     const description = this.scoContent['og_description'] || this.DEFAULT_DESCRIPTION;
 

@@ -7,7 +7,6 @@ import { FaqComponent } from './faq/faq.component';
 import { Error404Component } from './error404/error404.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { OfferComponent } from './offer/offer.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
@@ -33,10 +32,6 @@ const routes: Routes = [
   {
     path: 'offers',
     component: OfferComponent
-  },
-  {
-    path: 'about-us',
-    component: AboutUsComponent
   },
   {
     path: 'search',

@@ -9,7 +9,6 @@ import { Error404Component } from './error404/error404.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SkeletonPageComponent } from './skeleton-page/skeleton-page.component';
 import { OfferComponent } from './offer/offer.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ContactUsComponent,
     SkeletonPageComponent,
     OfferComponent,
-    AboutUsComponent,
     SearchComponent,
   ],
   imports: [

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /no-index/
-Allow: /
+
 Sitemap: https://gajlaxmifashion.in/sitemap.xml
