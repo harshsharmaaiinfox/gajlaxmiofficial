@@ -1,4 +1,14 @@
 User-agent: *
-Disallow: /no-index/
+Allow: /
+Allow: /collections/*
+
+Disallow: /auth/
+Disallow: /account/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /wishlist
+Disallow: /compare
+Disallow: /search
+Disallow: /order/
 
 Sitemap: https://gajlaxmifashion.in/sitemap.xml
