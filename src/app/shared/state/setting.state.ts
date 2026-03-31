@@ -21,7 +21,7 @@ export class SettingStateModel {
 @Injectable()
 export class SettingState {
 
-  constructor(private settingService: SettingService) {}
+  constructor(private settingService: SettingService) { }
 
   @Selector()
   static setting(state: SettingStateModel) {
@@ -34,18 +34,18 @@ export class SettingState {
   }
 
   @Action(GetSettingOption)
-  getSettingOptions(ctx: StateContext<SettingStateModel>) { 
+  getSettingOptions(ctx: StateContext<SettingStateModel>) {
     return this.settingService.getSettingOption().pipe(
       tap({
         next: (result) => {
           let customValue;
           const state = ctx.getState();
-         
-          if(!state.selectedCurrency && result?.values?.general){
+
+          if (!state.selectedCurrency && result?.values?.general) {
             state.selectedCurrency = result?.values?.general.default_currency;
           }
 
-          if(result.values?.payment_methods?.length) {
+          if (result.values?.payment_methods?.length) {
             customValue = JSON.parse(JSON.stringify(result.values));
             const customPayments = [
               {
@@ -80,7 +80,7 @@ export class SettingState {
               },
               {
                 name: 'gajlaxmi_neo',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT',
               },
               {
@@ -91,7 +91,7 @@ export class SettingState {
               },
               {
                 name: 'gajlaxmi_neo2',
-                status: true,
+                status: false,
                 title: 'Pay By UPI INTENT2',
               },
             ];
@@ -99,8 +99,8 @@ export class SettingState {
             customValue.general.site_name = "Gajlaxmi Fashion";
           }
           ctx.patchState({
-          ...state,
-          setting: customValue,
+            ...state,
+            setting: customValue,
           });
         },
         error: (err) => {
@@ -111,12 +111,12 @@ export class SettingState {
   }
 
   @Action(SelectedCurrency)
-  selectedCurrency(ctx: StateContext<SettingStateModel>, action: SelectedCurrency){
+  selectedCurrency(ctx: StateContext<SettingStateModel>, action: SelectedCurrency) {
     const state = ctx.getState();
     ctx.patchState({
       ...state,
       selectedCurrency: action.payload
     });
   }
-  
+
 }
