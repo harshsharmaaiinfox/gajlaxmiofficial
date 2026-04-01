@@ -34,12 +34,12 @@ export class ParisComponent implements OnInit, OnDestroy {
   public bannerImages = [
 
     {
-      src: 'assets/images/gajlaxmifashion.jpg',
+      src: 'assets/images/3.png',
       alt: 'Soft Fabrics Strong Style',
       url: '/collections?category=winter-collections&sortBy=asc'
     },
     {
-      src: 'assets/images/Gajlaxmi 2.jpg',
+      src: 'assets/images/4.png',
       alt: 'New Arrival Winter Collection',
       url: '/collections?category=winter-collections&sortBy=asc'
     }
