@@ -36,12 +36,12 @@ export class ParisComponent implements OnInit, OnDestroy {
     {
       src: 'assets/images/3.png',
       alt: 'Soft Fabrics Strong Style',
-      url: '/collections?category=winter-collections&sortBy=asc'
+      url: '/collections?category=women'
     },
     {
       src: 'assets/images/4.png',
       alt: 'New Arrival Winter Collection',
-      url: '/collections?category=winter-collections&sortBy=asc'
+      url: '/collections?category=men&sortBy=asc'
     }
 
   ];
