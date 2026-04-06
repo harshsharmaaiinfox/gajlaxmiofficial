@@ -10,7 +10,10 @@ import { AccountState } from '../../../shared/state/account.state';
 import { CartState } from '../../../shared/state/cart.state';
 import { OrderState } from '../../../shared/state/order.state';
 import { Checkout, PlaceOrder } from '../../../shared/action/order.action';
-import { ClearCart } from '../../../shared/action/cart.action';
+import { ClearCart, GetCartItems } from '../../../shared/action/cart.action';
+import { Register } from '../../../shared/action/auth.action';
+import { GetUserDetails } from '../../../shared/action/account.action';
+import { CartAddOrUpdate } from '../../../shared/interface/cart.interface';
 import { AddressModalComponent } from '../../../shared/components/widgets/modal/address-modal/address-modal.component';
 import { Cart } from '../../../shared/interface/cart.interface';
 import { SettingState } from '../../../shared/state/setting.state';
@@ -71,6 +74,8 @@ export class CheckoutComponent {
 
   storeData: any;
   localUserCheck: any;
+  public guestCartItems: Cart[] = [];
+  public guestCartTotal: number = 0;
 
   payByNeoKredIntentSaveData: any;
   payByNeoStep = 0;
@@ -233,7 +238,8 @@ export class CheckoutComponent {
       }
     });
     
-    this.localUserCheck = JSON.parse(localStorage.getItem('account') || '');
+    const accountData = localStorage.getItem('account');
+    this.localUserCheck = accountData ? JSON.parse(accountData) : null;
     
   }
 
@@ -243,7 +249,57 @@ export class CheckoutComponent {
 
   ngOnInit() {
     this.checkout$.subscribe(data => this.checkoutTotal = data);
+    this.restoreGuestCartFromStorage();
     this.products();
+  }
+
+  /**
+   * For guest users, make sure the cart state is hydrated from the
+   * persisted localStorage entry written by NgxsStoragePlugin. If the
+   * in-memory CartState has been cleared (e.g. by a previous navigation
+   * or a stale ngOnDestroy), this re-populates it so the checkout summary
+   * shows the items the guest selected.
+   */
+  private restoreGuestCartFromStorage() {
+    const isLoggedIn = this.store.selectSnapshot(state => state?.auth && state?.auth?.access_token);
+    if (isLoggedIn) return;
+
+    // Always keep a local copy sourced from the CartState observable so
+    // the checkout summary stays in sync with in-memory state.
+    this.cartItem$.subscribe(items => {
+      if (items && items.length) {
+        this.guestCartItems = items;
+      } else {
+        // Fallback: read the persisted cart that NgxsStoragePlugin writes.
+        try {
+          const raw = localStorage.getItem('cart');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            const storedItems: Cart[] = parsed?.items || [];
+            if (storedItems.length) {
+              this.guestCartItems = storedItems;
+            }
+          }
+        } catch (e) {
+          // ignore malformed storage
+        }
+      }
+      this.guestCartTotal = (this.guestCartItems || []).reduce(
+        (prev: number, curr: Cart) => prev + Number(curr?.sub_total || 0),
+        0
+      );
+      // Keep the form products array in sync so Place Order works.
+      this.productControl.clear();
+      this.guestCartItems.forEach((item: Cart) =>
+        this.productControl.push(
+          this.formBuilder.group({
+            product_id: new FormControl(item?.product_id, [Validators.required]),
+            variation_id: new FormControl(item?.variation_id ? item?.variation_id : ''),
+            quantity: new FormControl(item?.quantity),
+          })
+        )
+      );
+    });
   }
 
   products() {
@@ -897,9 +953,98 @@ export class CheckoutComponent {
     this.store.dispatch(new ClearCart());
   }
 
+  /**
+   * Register the guest using the Account Details fields, sync the
+   * locally-held cart items to the server, fetch the user profile, and
+   * reload the checkout so the logged-in view (address selection, payment
+   * options, etc.) is shown with the same cart intact.
+   */
+  registerAndContinue() {
+    const nameCtrl = this.form.get('name');
+    const emailCtrl = this.form.get('email');
+    const phoneCtrl = this.form.get('phone');
+    const countryCodeCtrl = this.form.get('country_code');
+    const passwordCtrl = this.form.get('password');
+
+    nameCtrl?.setValidators([Validators.required]);
+    passwordCtrl?.setValidators([Validators.required]);
+    nameCtrl?.updateValueAndValidity();
+    passwordCtrl?.updateValueAndValidity();
+
+    nameCtrl?.markAsTouched();
+    emailCtrl?.markAsTouched();
+    phoneCtrl?.markAsTouched();
+    passwordCtrl?.markAsTouched();
+
+    if (nameCtrl?.invalid || emailCtrl?.invalid || phoneCtrl?.invalid || passwordCtrl?.invalid) {
+      return;
+    }
+
+    const payload = {
+      name: nameCtrl?.value,
+      email: emailCtrl?.value,
+      phone: phoneCtrl?.value,
+      country_code: countryCodeCtrl?.value,
+      password: passwordCtrl?.value,
+      password_confirmation: passwordCtrl?.value
+    };
+
+    this.loading = true;
+    this.store.dispatch(new Register(payload as any)).subscribe({
+      complete: () => {
+        // Sync the guest cart items to the newly created account
+        const syncItems: CartAddOrUpdate[] = (this.guestCartItems || []).map(item => ({
+          id: null,
+          product: item?.product,
+          product_id: item?.product_id,
+          variation: item?.variation ? item.variation : null,
+          variation_id: item?.variation_id ? item.variation_id : null,
+          quantity: item.quantity
+        }));
+
+        const finish = () => {
+          this.store.dispatch(new GetCartItems()).subscribe({
+            complete: () => {
+              this.store.dispatch(new GetUserDetails()).subscribe({
+                complete: () => {
+                  this.loading = false;
+                  // Full reload so the logged-in checkout view rebuilds
+                  // using the freshly-synced cart state from the server.
+                  window.location.href = '/checkout';
+                }
+              });
+            }
+          });
+        };
+
+        if (syncItems.length) {
+          // POST each guest item to the real cart endpoint sequentially
+          // so every product is guaranteed on the server before reload.
+          const addNext = (index: number) => {
+            if (index >= syncItems.length) {
+              finish();
+              return;
+            }
+            this.cartService.addToCart(syncItems[index]).subscribe({
+              next: () => addNext(index + 1),
+              error: () => addNext(index + 1)
+            });
+          };
+          addNext(0);
+        } else {
+          finish();
+        }
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+
   ngOnDestroy() {
-    // this.store.dispatch(new Clear());
-    this.store.dispatch(new ClearCart());
+    // Do not clear the cart on destroy — guest cart items would disappear
+    // when navigating away from checkout. Cart should only clear after a
+    // successful order placement.
     this.form.reset();
     this.pollingSubscription && this.pollingSubscription.unsubscribe();
   }
