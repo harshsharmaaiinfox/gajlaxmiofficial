@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Product, ProductModel } from '../../../../shared/interface/product.interface';
@@ -24,7 +25,28 @@ export class ImageLinkComponent {
 
   public storageURL = environment.storageURL;
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  cleanLink(link: string): string {
+    if (!link) return '/';
+    
+    // Convert to relative if it's the same domain
+    if (link.includes('gajlaxmifashion.in')) {
+      link = link.split('gajlaxmifashion.in')[1];
+    }
+
+    // Standardize collection URLs as requested by user
+    if (link.includes('collections?category=') || link.includes('collections?sortBy=')) {
+      return '/collections';
+    }
+
+    return link;
+  }
+
+  isExternal(link: string): boolean {
+    if (!link) return false;
+    return link.includes('http') && !link.includes('gajlaxmifashion.in');
+  }
 
   getProductSlug(id: number, products: Product[]) {
     let product = products.find(product => product.id === id);

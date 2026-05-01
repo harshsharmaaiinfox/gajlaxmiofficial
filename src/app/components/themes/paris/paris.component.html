@@ -7,7 +7,7 @@
         <div class="banner-slides">
           <div *ngFor="let banner of bannerImages; let i = index" class="banner-slide"
             [class.active]="i === currentSlide">
-            <a [href]="banner.url" [title]="banner.alt">
+            <a [routerLink]="banner.url" [title]="banner.alt">
               <img [src]="banner.src" [alt]="banner.alt" class="img-fluid w-100"
                 [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
                 decoding="async" [title]="banner.alt">
@@ -50,14 +50,14 @@
           <div class="seo-content text-center">
             <h1>Shop Men’s & Women’s Clothing Online in India – Trendy Fashion for Every Style</h1>
             <p>Welcome to GajLaxmi Fashion, your online destination for stylish and affordable clothing for <a
-                [routerLink]="['/category/men']">men</a> and
-              <a [routerLink]="['/category/women']">women</a> in India. Explore a wide collection of fashionable outfits
+                [routerLink]="['/collections/men']">men</a> and
+              <a [routerLink]="['/collections/women']">women</a> in India. Explore a wide collection of fashionable outfits
               including sarees, suit sets, dresses,
               tops, and comfortable men’s wear designed for both everyday style and special occasions. At GajLaxmi
               Fashion, we combine modern trends, quality fabrics, and comfort to bring you clothing that helps you look
               confident and feel great in every season
             </p>
-            <a href="/collections" class="btn btn-animation cta-button">Shop Now</a>
+            <a routerLink="/collections" class="btn btn-animation cta-button">Shop Now</a>
           </div>
         </div>
       </div>

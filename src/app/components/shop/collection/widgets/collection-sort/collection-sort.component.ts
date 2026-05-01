@@ -82,8 +82,7 @@ export class CollectionSortComponent {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        sortBy: data && data.value ? data.value : null,
-        // field: data && (data.value == 'asc' || data.value == 'desc') ? 'created_at' : null
+        sortBy: data && data.value && data.value !== 'asc' ? data.value : null,
       },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
       skipLocationChange: false  // do trigger navigation

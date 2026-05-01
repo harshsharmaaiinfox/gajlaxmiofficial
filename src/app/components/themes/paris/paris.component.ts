@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable, forkJoin } from 'rxjs';
 import { GetBlogs } from '../../../shared/action/blog.action';
@@ -36,19 +36,20 @@ export class ParisComponent implements OnInit, OnDestroy {
     {
       src: 'assets/images/3.png',
       alt: 'Soft Fabrics Strong Style',
-      url: '/collections?category=women'
+      url: '/collections'
     },
     {
       src: 'assets/images/4.png',
       alt: 'New Arrival Winter Collection',
-      url: '/collections?category=men&sortBy=asc'
+      url: '/collections'
     }
 
   ];
 
   constructor(private store: Store,
   private themeOptionService: ThemeOptionService,
-  private route: ActivatedRoute) {
+  private route: ActivatedRoute,
+  private router: Router) {
   }
 
   ngOnInit() {
@@ -158,7 +159,7 @@ export class ParisComponent implements OnInit, OnDestroy {
 
   goToCollections() {
     // Navigate to collections page
-    window.location.href = '/collections?sortBy=asc';
+    this.router.navigate(['/collections']);
   }
 
 }
